@@ -26,8 +26,15 @@ class FrontendController extends Controller
         $maxOffer=  DB::table('products')->max('discount');
         return view('frontend.home.maincontent',['subcategories'=>$subcategories,'highOffer'=>$highOffer,'bestSell'=>$bestSell,'categories'=>$categories,'lastedproducts'=>$lastedproducts,'offerProduct'=>$offerProduct]);
     }
-    public function categoryProduct($slug){
-        $categoryProducts=Product::where('sub_cat_id',$slug)->where('pubstatus','active')->paginate(14);
+    public function categoryProduct($slug,Request $request){
+
+        if($request->from && $request->to){
+            $categoryProducts=Product::where('sub_cat_id',$slug)->where('pubstatus','active')->whereBetween('sell_price', [$request->from, $request->to])->paginate(14);
+        }else{
+            $categoryProducts=Product::where('sub_cat_id',$slug)->where('pubstatus','active')->paginate(14);
+        }
+
+        
         $viewCat=Category::where('category_status','active')->get();
         $lastedproducts=Product::where('pubstatus','active')->orderby('id','DESC')->limit(8)->get();
         return view('frontend.shop.categoryProduct',['categoryProducts'=>$categoryProducts,'viewCat'=>$viewCat,'lastedproducts'=>$lastedproducts,]);
@@ -63,7 +70,10 @@ class FrontendController extends Controller
         return view('frontend.shop.searchProduct',['allproducts'=>$allproducts,'viewCat'=>$viewCat,'lastedproducts'=>$lastedproducts,]);
        }
     public function subcategories($slug){
+
+        
         $subcategory=Subcategory::where('cat_slug',$slug)->get();
+
         $lastedproducts=Product::where('pubstatus','active')->orderby('id','DESC')->limit(8)->get();
         return view('frontend.shop.subcategory',['subcategorys'=>$subcategory,'lastedproducts'=>$lastedproducts,]);
     }

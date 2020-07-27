@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/','FrontendController@index')->name('main');
-Route::get('/products/{slug}','FrontendController@categoryProduct');
+Route::get('/products/{slug}','FrontendController@categoryProduct')->name('showProductByCategory');
 Route::get('/category/{slug}','FrontendController@subcategories');
 Route::get('/products','FrontendController@allProduct');
 Route::get('/offer','FrontendController@offerProduct');

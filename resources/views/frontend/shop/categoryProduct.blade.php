@@ -152,11 +152,11 @@
 							<!-- left part start -->
 							<div class="col-md-9 shop-right-top-left">
 								<ul>
-									{{-- <li>sort by : </li>
-									<li class="click-sort sort-2" id="sort-2">price</li>
-									<li class="click-sort sort-3" id="sort-3">rating</li>
-									<li class="click-sort sort-4" id="sort-4">popularity</li>
-									<li class="click-sort sort-5" id="sort-5">newest</li> --}}
+								    <li>Price Filter : </li>
+									<li class="click-sort sort-2" id="sort-2"><a href="{{route('showProductByCategory',$subcategory->cat_slug)}}?from=20&to=100">20-100</a></li>
+									<li class="click-sort sort-3" id="sort-3"><a href="{{route('showProductByCategory',$subcategory->cat_slug)}}?from=100&to=200">100-200</a></li>
+									<li class="click-sort sort-4" id="sort-4"><a href="{{route('showProductByCategory',$subcategory->cat_slug)}}?from=200&to=400">200-400</a></li>
+									<li class="click-sort sort-5" id="sort-5"><a href="{{route('showProductByCategory',$subcategory->cat_slug)}}?from=400&to=700">400-700</a></li>
 								</ul>
 							</div>
 							<!-- left part end -->
@@ -180,7 +180,11 @@
 						<!-- grid wise -->
 						<div class="row col-wise">
 							
-                            <!-- product item start -->
+							<!-- product item start -->
+					@if(!$categoryProducts->count())
+
+					<h2 class="text-warning text-center">No product found!</h2>
+					@endif
                             @foreach ($categoryProducts as $product)
                                 
                           
@@ -227,6 +231,7 @@
                             </div>
                             @endforeach
 							<!-- product item end -->
+
 
 							@foreach($categoryProducts as $product) 
 							<!-- product quick view popup start -->
