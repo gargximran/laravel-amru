@@ -71,25 +71,8 @@
 			</div>
 			<!--- logo end -->
 
-			<!-- search option start -->
-			<div class="col-md-6">
-				<div class="topbar-bottom-search">
-				<form action="{{url('/search')}}" method="post">
-					@csrf
-						<div class="form-group">
-							<input type="search" class="form-control" name="search" placeholder="Search For Products">
-						</div>
-
-						<div class="form-group search-button">
-							<input type="submit" class="form-control" value="Search" name="">
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- search option end -->
-
 			<!-- cart wishlist start -->
-			<div class="col-md-3">
+			<div class="col-md-9">
 				<div class="cart-wishlist">
 					<ul>
 						<li>
